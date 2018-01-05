@@ -12,7 +12,7 @@ import eventHandler from "./eventHandler";
 
 /**
  * Create an instance of the eg.Flicking class. Create a flicking UI that sweeps a side-by-side panel with mouse move or touch move input and moves to the next or previous panel.
- * @ko eg.Flicking클래스의 인스턴스를 생성한다. 나란히 배치한 패널을 마우스 무브 혹은 터치 무브 입력을 받아 쓸어 넘겨 다음 패널이나 이전 패널로 이동하는 UI를 만든다.
+ * @ko eg.Flicking 클래스의 인스턴스를 생성한다. 나란히 배치한 패널을 마우스 이동(move) 혹은 터치 이동(move) 입력을 받아 쓸어 넘겨 다음 패널이나 이전 패널로 이동하는 UI를 만든다.
  * @alias eg.Flicking
  * @extends eg.Component
  * @requires {@link https://github.com/naver/egjs-component|eg.Component}
@@ -35,11 +35,11 @@ import eventHandler from "./eventHandler";
  * // Examples to omit and omit optional options.
  * // 생략가능한 옵션은 생략하고 생성하는 예.
  * new eg.Flicking("#flick");
- * 
+ *
  * // An example of specifying and generating values for all optional parameters.
  * // 모든 옵션의 값을 지정하고 생성하는 예.
  * new eg.Flicking("#flick", {
- * 	hwAccelerable: eg.isHWAccelerable(),
+ * 	hwAccelerable: true,
  * 	prefix: "eg-flick",
  * 	deceleration: 0.0006,
  * 	horizontal: true,
@@ -62,11 +62,11 @@ import eventHandler from "./eventHandler";
  * // An example of assigning HTMLElement to an element parameter.
  * // element 파라미터에 HTMLElement를 지정하는 예.
  * new eg.Flicking(document.getElementById("flick"));
- * 
+ *
  * // An example of assigning a jQuery object to an element parameter.
  * // element 파라미터에 jQuery객체를 지정하는 예.
- * new eg.Flicking($("#flick"));
- * 
+ * new eg.Flicking($("#flick")[0]);
+ *
  * // An example of assigning a css selector string to an element parameter.
  * // element 파라미터에 css 선택자 문자열을 지정하는 예.
  * new eg.Flicking("#flick");
@@ -82,7 +82,7 @@ import eventHandler from "./eventHandler";
  * 	<div><p>panel 1</p></div>
  * 	<div><p>panel 2</p></div>
  * </div>
- * 
+ *
  * <!--An example of defining a panel element as a child of a container element.-->
  * <!--패널 요소를 컨테이너 요소의 자식으로 정의한 예.-->
  * <div id="flick2">
@@ -126,9 +126,9 @@ import eventHandler from "./eventHandler";
 export default class Flicking extends Mixin(Component).with(eventHandler) {
 	/**
 	 * Constructor
-	 * @param {HTMLElement|String|jQuery} element A base element for the eg.Flicking module. When specifying a value as a `String` type, you must specify a css selector string to select the element.<ko>eg.Flicking 모듈을 사용할 기준 요소. `String`타입으로 값 지정시 요소를 선택하기 위한 css 선택자 문자열을 지정해야 한다.</ko>
+	 * @param {HTMLElement|String} element A base element for the eg.Flicking module. When specifying a value as a `String` type, you must specify a css selector string to select the element.<ko>eg.Flicking 모듈을 사용할 기준 요소. `String`타입으로 값 지정시 요소를 선택하기 위한 css 선택자 문자열을 지정해야 한다.</ko>
 	 * @param {Object} [options] The option object of the eg.Flicking module<ko>eg.Flicking 모듈의 옵션 객체</ko>
-	 * @param {Boolean} [options.hwAccelerable=eg.isHWAccelerable()] Force hardware compositing.<ko>하드웨어 가속 사용 여부.</ko>
+	 * @param {Boolean} [options.hwAccelerable=true] Force hardware compositing.<ko>하드웨어 가속 사용 여부.</ko>
 	 * @param {String} [options.prefix="eg-flick"] A prefix for class names of the panel elements.<ko>패널 요소의 클래스 이름 접두사.</ko>
 	 * @param {Number} [options.deceleration=0.0006] Deceleration of the animation where acceleration is manually enabled by user. A higher value indicates shorter running time.<ko>사용자의 동작으로 가속도가 적용된 애니메이션의 감속도. 값이 높을수록 애니메이션 실행 시간이 짧아진다.</ko>
 	 * @param {Boolean} [options.horizontal=true] Direction of the panel movement. (true: horizontal, false: vertical)<ko>패널 이동 방향. (true 가로방향, false 세로방향)</ko>
@@ -871,7 +871,7 @@ export default class Flicking extends Mixin(Component).with(eventHandler) {
 
 			/**
 			 * The event that occurs after completing the move to the destination panel. It occurs in the following cases.<br><br>- After completing the movement to the destination panel by user's move input.<br>- `moveTo()`, `prev()`, `next()` method call. (It does not occur if you have disabled the default behavior of the [beforeFlickStart]{@link eg.Flicking#event:beforeFlickStart} event.)
-			 * @ko 목적 패널로의 이동을 완료한 다음 발생하는 이벤트. 아래의 경우에 발생한다.<br><br>- 사용자의 무브 액션 입력에 의한 목적 패널로의 이동완료 후.<br>- `moveTo()`, `prev()`, `next()` 메서드 호출.([beforeFlickStart]{@link eg.Flicking#event:beforeFlickStart}이벤트의 기본동작을 막았다면 발생하지 않는다.)
+			 * @ko 목적 패널로의 이동을 완료한 다음 발생하는 이벤트. 아래의 경우에 발생한다.<br><br>- 사용자의 이동(move) 액션 입력에 의한 목적 패널로의 이동완료 후.<br>- `moveTo()`, `prev()`, `next()` 메서드 호출.([beforeFlickStart]{@link eg.Flicking#event:beforeFlickStart}이벤트의 기본동작을 막았다면 발생하지 않는다.)
 			 * @name eg.Flicking#flickEnd
 			 * @event
 			 * @property {String} eventType The name of the event.<ko>이벤트 명</ko>
@@ -1135,7 +1135,7 @@ export default class Flicking extends Mixin(Component).with(eventHandler) {
 	 * 	console.log(currentTarget.getIndex()); // 1 > 2 > 3
 	 * 	console.log(currentTarget.getIndex(true)); // 1 > 2 > 3
 	 * };
-	 * 
+	 *
 	 * // circular on and left flicking.
 	 * // 순환을 켜고 좌 플리킹.
 	 * new eg.Flicking("#flick", {circular: true}).on("flickEnd", {currentTarget} => {
@@ -1160,15 +1160,15 @@ export default class Flicking extends Mixin(Component).with(eventHandler) {
 	 * const flick = new eg.Flicking("flick2", {
 	 * 	circular: true
 	 * });
-	 * 
+	 *
 	 * // The content of the current panel is the first in the panel definition order.
 	 * // 현재 패널이 담고 있는 컨텐트는 패널 정의 순서상 첫 번째이다.
 	 * flick.getIndex(); // 0
-	 * 
+	 *
 	 * // The content of the next panel is the second in the panel definition order.
 	 * // 다음 패널이 담고 있는 컨텐트는 패널 정의 순서상 두 번째이다.
 	 * flick.getNextIndex(); // 1
-	 * 
+	 *
 	 * // The content of the previous panel is the second in the panel definition order.
 	 * // 이전 패널이 담고 있는 컨텐트는 패널 정의 순서상 두 번째이다.
 	 * flick.getPrevIndex(); // 1
@@ -1410,11 +1410,11 @@ export default class Flicking extends Mixin(Component).with(eventHandler) {
 	 * const flick = new eg.Flicking("#flick", {
 	 * 	previewPadding: [10, 10]
 	 * });
-	 * 
+	 *
 	 * // When device orientaion changes.
 	 * // 단말기를 회전했을 때.
 	 * flick.resize();
-	 * 
+	 *
 	 * // Or when changes previewPadding option from its original value.
 	 * // 또는 previewPadding옵션값을 변경했을 때.
 	 * flick.options.previewPadding = [20, 30];
@@ -1482,8 +1482,8 @@ export default class Flicking extends Mixin(Component).with(eventHandler) {
 	 * 	if (e.no === 2) {
 	 * 		// Cancels the default behavior of the 'beforeFlickStart' event.
 	 * 		// 'beforeFlickStart' 이벤트 기본동작 취소.
-	 * 		e.stop(); 
-	 * 
+	 * 		e.stop();
+	 *
 	 * 		// Return to original position.
 	 * 		// 원래 자리로 되돌림.
 	 * 		this.restore(100);
@@ -1557,7 +1557,7 @@ export default class Flicking extends Mixin(Component).with(eventHandler) {
 	 * const flick = new eg.Flicking("flick");
 	 * const status = flick.getStatus();
 	 * const jsonStaus = flick.getStatus(true);
-	 * 
+	 *
 	 * console.log(status); // {panel: {...}, $list: Array(7)}
 	 * console.log(jsonStatus); // "{\"panel\":{\"index\":3,\"no\":6,\"currIndex\":3,\"currNo\":6},\"$list\":[{\"style\":\"background-color: rgb(155, 49, 137); position: absolute;  height: 100%;\",\"className\":\"eg-flick-panel\",\"html\":\"\n\t\t\t\t\t\t\t\t&lt;p&gt;panel 3&lt;/p&gt;\n\t\t\t\t\t\t\"},{\"style\":\"background-color: rgb(51, 172, 91); position: absolute;  height: 100%;\",\"className\":\"eg-flick-panel\",\"html\":\"\n\t\t\t\t\t\t\t\t&lt;p&gt;panel 4&lt;/p&gt;\n\t\t\t\t\t\t\"},{\"style\":\"background-color: rgb(116, 38, 241); position: absolute;  height: 100%;\",\"className\":\"eg-flick-panel\",\"html\":\"\n\t\t\t\t\t\t\t\t&lt;p&gt;panel 5&lt;/p&gt;\n\t\t\t\t\t\t\"},{\"style\":\"background-color: rgb(141, 139, 24); position: absolute;  height: 100%;\",\"className\":\"eg-flick-panel\",\"html\":\"\n\t\t\t\t\t\t\t\t&lt;p&gt;panel 6&lt;/p&gt;\n\t\t\t\t\t\t\"},{\"style\":\"background-color: rgb(204, 102, 204); position: absolute;  height: 100%;\",\"className\":\"eg-flick-panel\",\"html\":\"\n\t\t\t\t\t\t\t\t&lt;p&gt;panel 0&lt;/p&gt;\n\t\t\t\t\t\t\"},{\"style\":\"background-color: rgb(54, 53, 156); position: absolute;  height: 100%;\",\"className\":\"eg-flick-panel\",\"html\":\"\n\t\t\t\t\t\t\t\t&lt;p&gt;panel 1&lt;/p&gt;\n\t\t\t\t\t\t\"},{\"style\":\"background-color: rgb(196, 218, 72); position: absolute;  height: 100%;\",\"className\":\"eg-flick-panel\",\"html\":\"\n\t\t\t\t\t\t\t\t&lt;p&gt;panel 2&lt;/p&gt;\n\t\t\t\t\t\t\"}]}"
 	 */
@@ -1610,11 +1610,11 @@ export default class Flicking extends Mixin(Component).with(eventHandler) {
 	 * @example
 	 * const flick = new eg.Flicking("flick");
 	 * const status = flick.getStatus();
-	 * 
+	 *
 	 * // Move to arbitrary panel.
 	 * // 임의 패널로 이동
 	 * flick.moveTo(2);
-	 * 
+	 *
 	 * // Restore to status.
 	 * // status 상태로 복원
 	 * flick.setStatus(status);
